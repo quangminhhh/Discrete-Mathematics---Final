@@ -1,16 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S "/Users/quangminh/Desktop/Discrete mathematics/Final" -B "/Users/quangminh/Desktop/Discrete mathematics/Final/cmake-build-debug"
--- The C compiler identification is AppleClang 16.0.0.16000026
--- The CXX compiler identification is AppleClang 16.0.0.16000026
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Configuring done (1.4s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/quangminh/Desktop/Discrete mathematics/Final/cmake-build-debug
+"F:\Program Files\JetBrains\CLion 2024.2.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles" -S "F:\All Code\Github Clone" -B "F:\All Code\Github Clone\cmake-build-debug"
+-- Configuring done (0.2s)
+-- Generating done (0.4s)
+-- Build files have been written to: F:/All Code/Github Clone/cmake-build-debug
