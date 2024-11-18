@@ -1,0 +1,3 @@
+/Users/quangminh/Desktop/Discrete mathematics/Final/cmake-build-debug/CMakeFiles/Final.dir
+/Users/quangminh/Desktop/Discrete mathematics/Final/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/quangminh/Desktop/Discrete mathematics/Final/cmake-build-debug/CMakeFiles/rebuild_cache.dir
