@@ -1,4 +1,4 @@
-.gitignore
 ncurses*
 test.exe
 olcPixelGameEngine.h
+termcolor.hpp
