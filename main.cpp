@@ -7,34 +7,31 @@
     #include <algorithm>
     #include "termcolor.hpp"
 
-    // Define namespace for easier management
     using namespace std;
 
-    // Node structure represents a bus stop
     struct Node
     {
         string name;
-        double x; // X coordinate (can be used for heuristic function)
-        double y; // Y coordinate
+        double x;
+        double y;
 
         Node(string n, double x_coord, double y_coord) : name(n), x(x_coord), y(y_coord) {}
     };
 
-    // Edge structure represents a connection between two nodes
     struct Edge
     {
-        int to;          // Index of the destination node in the nodes list
-        double distance; // Distance between nodes
-        double cost;     // Cost between nodes
+        int to;
+        double distance;
+        double cost;
 
         Edge(int t, double d, double c) : to(t), distance(d), cost(c) {}
     };
 
-    // Graph structure manages the adjacency list
+
     struct Graph
     {
         vector<Node> nodes;
-        unordered_map<int, vector<Edge> > adjList; // Add space between > characters
+        unordered_map<int, vector<Edge> > adjList;
 
         void addNode(const string &name, double x, double y)
         {
@@ -44,11 +41,10 @@
         void addEdge(int from, int to, double distance, double cost)
         {
             adjList[from].emplace_back(to, distance, cost);
-            adjList[to].emplace_back(from, distance, cost); // Undirected graph
+            adjList[to].emplace_back(from, distance, cost);
         }
     };
 
-    // Structure to store information in the priority queue
     struct PriorityNode
     {
         int node;
@@ -56,7 +52,7 @@
 
         bool operator<(const PriorityNode &other) const
         {
-            return f > other.f; // Reverse to prioritize the smallest f value
+            return f > other.f;
         }
     };
 
@@ -66,14 +62,14 @@
         return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
     }
 
-    // A* function to find the optimal path
+
     bool AStar(const Graph &graph, int start, int goal, double alpha, double beta,
                vector<int> &path, double &totalDistance, double &totalCost)
     {
         int n = graph.nodes.size();
-        vector<double> g(n, numeric_limits<double>::infinity()); // Distance traveled
-        vector<double> c(n, numeric_limits<double>::infinity()); // Cost incurred
-        vector<int> cameFrom(n, -1);                             // Parent node
+        vector<double> g(n, numeric_limits<double>::infinity());
+        vector<double> c(n, numeric_limits<double>::infinity());
+        vector<int> cameFrom(n, -1);
 
         priority_queue<PriorityNode> openSet;
         g[start] = 0.0;
@@ -88,7 +84,6 @@
 
             if (current.node == goal)
             {
-                // Reconstruct path
                 path.clear();
                 int node = goal;
                 while (node != -1)
@@ -123,20 +118,17 @@
             }
         }
 
-        // No path found
         return false;
     }
 
     int main()
     {
-        // Tiêu đề chính
         cout << termcolor::bold << termcolor::blue;
         cout << "============================\n";
         cout << " BUS ROUTER PROGRAMMING\n";
         cout << "============================\n";
         cout << termcolor::reset;
 
-        // Initialize graph
         Graph graph;
 
         // Add nodes (name, x, y)
@@ -151,7 +143,6 @@
         graph.addNode("I", 14, 0);
         graph.addNode("J", 15, 3);
 
-        // Add edges (from, to, distance, cost)
         graph.addEdge(0, 1, 3.6, 2.0); // A - B
         graph.addEdge(0, 2, 5.1, 3.0); // A - C
         graph.addEdge(1, 3, 4.1, 2.5); // B - D
@@ -165,7 +156,6 @@
         graph.addEdge(8, 9, 3.3, 2.6); // I - J
         graph.addEdge(5, 6, 4.0, 3.0); // F - G
 
-        // Print the current bus route structure
         cout << termcolor::yellow << "Current bus route structure:\n" << termcolor::reset;
         for (const auto &node : graph.nodes)
         {
@@ -179,7 +169,6 @@
             int from = pair.first;
             for (const auto &edge : pair.second)
             {
-                // To avoid printing both directions of each connection (due to undirected graph)
                 if (from < edge.to)
                 {
                     cout << termcolor::blue << graph.nodes[from].name
@@ -193,7 +182,6 @@
 
         cout << termcolor::magenta << "\nPlease enter the starting point and destination:\n" << termcolor::reset;
 
-        // Display the list of stops
         cout << termcolor::green << "Bus stops:\n" << termcolor::reset;
         for (size_t i = 0; i < graph.nodes.size(); ++i)
         {
@@ -207,18 +195,15 @@
         cout << termcolor::yellow << "Enter the number corresponding to the destination: " << termcolor::reset;
         cin >> goal;
 
-        // Check input validity
         if (start < 0 || start >= graph.nodes.size() || goal < 0 || goal >= graph.nodes.size())
         {
             cout << termcolor::red << "Invalid starting point or destination.\n" << termcolor::reset;
             return 1;
         }
 
-        // Weights for distance and cost
         double alpha = 1.0; // Weight for distance
         double beta = 1.0;  // Weight for cost
 
-        // Find the optimal path
         vector<int> path;
         double totalDistance = 0.0;
         double totalCost = 0.0;
